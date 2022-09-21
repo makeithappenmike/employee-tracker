@@ -5,8 +5,8 @@ const initialQuestions = [
     {
         type: 'list',
         message: 'Hello! Which team member would you like to add first?',
-        choices: ['Manager', 'Engineer', 'Intern'],
-        name: 'teamMember'
+        choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an Employee Role'],
+        name: 'choice'
     }
 ];
 
