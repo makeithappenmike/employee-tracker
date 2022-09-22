@@ -1,7 +1,8 @@
 const inquirer = require('inquirer');
 const express = require('express');
+const cTable = require('console.table');
 // Import and require mysql2
-const mysql = require('mysql2/promise');
+// const mysql = require('mysql2');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -11,20 +12,35 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Connect to database
-const db = mysql.createConnection(
-  {
-    host: 'localhost',
-    // MySQL username,
-    user: 'root',
-    // TODO: Add MySQL password here
-    password: 'root',
-    database: 'employee_db'
-  })
-  .then(conn => conn.query('select foo from bar'))
-  .then(([rows, fields]) => console.log(rows[0].foo));
+async function main() {
+    // get the client
+    const mysql = require('mysql2/promise');
+    // create the connection
+    const db = await mysql.createConnection({host:'localhost', user: 'root', password: 'root', database: 'employee_db'});
+    // query database
+    const [rows, fields] = await db.execute('SHOW tables;');
+  }
+// const db = mysql.createConnection(
+//     {host:'localhost', user: 'root', password: 'root', database: 'employee_db'}
+//   );
+//   db.promise().query("SELECT *")
+//     .then( ([rows,fields]) => {
+//       console.log(rows);
+//     })
+//     .catch(console.log)
+//     .then( () => db.end());
 
-  console.log(`Connected to the employee_db database.`)
-
+// const db = mysql.createConnection(
+//   {
+//     host: 'localhost',
+//     // MySQL username,
+//     user: 'root',
+//     // TODO: Add MySQL password here
+//     password: 'root',
+//     database: 'employee_db'
+//   },
+//   console.log(`Connected to the employee_db database.`)
+// );
 
 // Intial Questions
 const initialQuestions = [
@@ -137,25 +153,38 @@ function initialPrompt() {
 
 // 'View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an Employee Role'
 
+async function connectDb(dbQuery) {
+
+    // get the client
+    const mysql = require('mysql2/promise');
+    // create the connection
+    const db = await mysql.createConnection({host:'localhost', user: 'root', password: 'root', database: 'employee_db'});
+    // query database
+    const [rows, fields] = await db.execute(dbQuery);
+    console.log("\n");
+    console.table(rows);
+
+};
+
 // View Departments
 function viewDepartments() {
 
-        // Show all Departments
-        db.query('SELECT * FROM department;', function (err, results) {
-            console.table(results);
-        });
+    const dbQuery = "SELECT * FROM department;"
 
-        initialPrompt();
+    // Show all Departments
+    connectDb(dbQuery);
+
+    initialPrompt();
 
 };
 
 // View Roles
 function viewRoles() {
 
-    // Show all Roles
-    db.query('SELECT * FROM role', function (err, results) {
-        console.table(results);
-    });
+    const dbQuery = "SELECT * FROM role;"
+
+    // Show all Departments
+    connectDb(dbQuery);
 
     initialPrompt();
 
@@ -164,10 +193,10 @@ function viewRoles() {
 // View Employees
 function viewEmployees() {
 
+    const dbQuery = "SELECT * FROM employee;"
+
     // Show all Departments
-    db.query('SELECT * FROM employee', function (err, results) {
-        console.table(results);
-    });
+    connectDb(dbQuery);
 
     initialPrompt();
 
@@ -223,5 +252,6 @@ function updateEmployee() {
 
 // Create a function to initialize app
 function init() {
+    main();
     initialPrompt();
 } init();
