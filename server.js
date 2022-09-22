@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const express = require('express');
 // Import and require mysql2
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -18,16 +18,19 @@ const db = mysql.createConnection(
     user: 'root',
     // TODO: Add MySQL password here
     password: 'root',
-    database: 'INSERT' // TODO: update this
-  },
-  console.log(`Connected to the INSERT database.`) // TODO: update this
-);
+    database: 'employee_db'
+  })
+  .then(conn => conn.query('select foo from bar'))
+  .then(([rows, fields]) => console.log(rows[0].foo));
+
+  console.log(`Connected to the employee_db database.`)
+
 
 // Intial Questions
 const initialQuestions = [
     {
         type: 'list',
-        message: 'Hello! Which team member would you like to add first?',
+        message: 'What would you like to do?',
         choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an Employee Role'],
         name: 'choice'
     }
@@ -97,6 +100,7 @@ const updateEmployeeQuestions = [
 
 // Initial Prompt
 function initialPrompt() {
+
     // Run inquirer
     inquirer
     .prompt(initialQuestions)
@@ -104,13 +108,18 @@ function initialPrompt() {
 
         console.log(response);
 
+        const choice = response.choice;
+
         // Handle selection
         if (choice === "View All Departments") {
             console.log("View All Departments");
+            viewDepartments();
         } else if (choice === "View All Roles") {
             console.log("View All Roles");
+            viewRoles();
         } else if (choice === "View All Employees") {
             console.log("View All Employees");
+            viewEmployees();
         } else if (choice === "Add a Department") {
             addDepartment();
         } else if (choice === "Add a Role") {
@@ -127,6 +136,42 @@ function initialPrompt() {
 };
 
 // 'View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an Employee Role'
+
+// View Departments
+function viewDepartments() {
+
+        // Show all Departments
+        db.query('SELECT * FROM department;', function (err, results) {
+            console.table(results);
+        });
+
+        initialPrompt();
+
+};
+
+// View Roles
+function viewRoles() {
+
+    // Show all Roles
+    db.query('SELECT * FROM role', function (err, results) {
+        console.table(results);
+    });
+
+    initialPrompt();
+
+};
+
+// View Employees
+function viewEmployees() {
+
+    // Show all Departments
+    db.query('SELECT * FROM employee', function (err, results) {
+        console.table(results);
+    });
+
+    initialPrompt();
+
+};
 
 // Add Department
 function addDepartment() {
@@ -175,9 +220,6 @@ function updateEmployee() {
 
     });
 };
-
-
-
 
 // Create a function to initialize app
 function init() {
