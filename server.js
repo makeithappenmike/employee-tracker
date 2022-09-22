@@ -18,9 +18,9 @@ const db = mysql.createConnection(
     user: 'root',
     // TODO: Add MySQL password here
     password: '',
-    database: 'movies_db'
+    database: 'INSERT' // TODO: update this
   },
-  console.log(`Connected to the movies_db database.`)
+  console.log(`Connected to the INSERT database.`) // TODO: update this
 );
 
 // Intial Questions
@@ -66,47 +66,33 @@ const addEmployeeQuestions = [
     {
         type: "input",
         message: "What is the employee's first name?",
-        name: "roleName"
+        name: "employeeFirst"
     },
     {
         type: "input",
         message: "What is the employee's last name?",
-        name: "roleSalary"
+        name: "employeeLast"
     },
     {
         type: "input",
         message: "What is the employee's role?",
-        name: "roleDepartment"
+        name: "employeeRole"
     },
     {
         type: "input",
         message: "Who is the employee's manager?",
-        name: "roleDepartment"
+        name: "employeeManager"
     },
 ];
 
 // Update an Employee Questions
 const updateEmployeeQuestions = [
     {
-        type: "input",
-        message: "What is the employee's first name?",
-        name: "roleName"
-    },
-    {
-        type: "input",
-        message: "What is the employee's last name?",
-        name: "roleSalary"
-    },
-    {
-        type: "input",
-        message: "What is the employee's role?",
-        name: "roleDepartment"
-    },
-    {
-        type: "input",
-        message: "Who is the employee's manager?",
-        name: "roleDepartment"
-    },
+        type: 'list',
+        message: 'Which employee would you like to make updates to?',
+        choices: ['Employee'],
+        name: 'employeeToUpdate'
+    }
 ];
 
 // Initial Prompt
@@ -126,6 +112,42 @@ function addDepartment() {
     // Run inquirer
     inquirer
     .prompt(addDepartmentQuestions)
+    .then((response) => {
+
+        console.log(response);
+
+    });
+};
+
+// Add Role
+function addRole() {
+    // Run inquirer
+    inquirer
+    .prompt(addRoleQuestions)
+    .then((response) => {
+
+        console.log(response);
+
+    });
+};
+
+// Add Employee
+function addEmployee() {
+    // Run inquirer
+    inquirer
+    .prompt(addEmployeeQuestions)
+    .then((response) => {
+
+        console.log(response);
+
+    });
+};
+
+// Update Employee
+function updateEmployee() {
+    // Run inquirer
+    inquirer
+    .prompt(updateEmployeeQuestions)
     .then((response) => {
 
         console.log(response);
