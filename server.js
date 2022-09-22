@@ -33,6 +33,82 @@ const initialQuestions = [
     }
 ];
 
+// Add Department Questions
+const addDepartmentQuestions = [
+    {
+        type: "input",
+        message: "What is the name of the department you'd like to add?",
+        name: "departmentName"
+    }
+];
+
+// Add Role Questions
+const addRoleQuestions = [
+    {
+        type: "input",
+        message: "What is the name of the new role you'd like to add?",
+        name: "roleName"
+    },
+    {
+        type: "input",
+        message: "What is the salary for this role?",
+        name: "roleSalary"
+    },
+    {
+        type: "input",
+        message: "What is the department for this role?",
+        name: "roleDepartment"
+    },
+];
+
+// Add Employee Questions
+const addEmployeeQuestions = [
+    {
+        type: "input",
+        message: "What is the employee's first name?",
+        name: "roleName"
+    },
+    {
+        type: "input",
+        message: "What is the employee's last name?",
+        name: "roleSalary"
+    },
+    {
+        type: "input",
+        message: "What is the employee's role?",
+        name: "roleDepartment"
+    },
+    {
+        type: "input",
+        message: "Who is the employee's manager?",
+        name: "roleDepartment"
+    },
+];
+
+// Update an Employee Questions
+const updateEmployeeQuestions = [
+    {
+        type: "input",
+        message: "What is the employee's first name?",
+        name: "roleName"
+    },
+    {
+        type: "input",
+        message: "What is the employee's last name?",
+        name: "roleSalary"
+    },
+    {
+        type: "input",
+        message: "What is the employee's role?",
+        name: "roleDepartment"
+    },
+    {
+        type: "input",
+        message: "Who is the employee's manager?",
+        name: "roleDepartment"
+    },
+];
+
 // Initial Prompt
 function initialPrompt() {
     // Run inquirer
@@ -44,6 +120,21 @@ function initialPrompt() {
 
     });
 };
+
+// Add Department
+function addDepartment() {
+    // Run inquirer
+    inquirer
+    .prompt(addDepartmentQuestions)
+    .then((response) => {
+
+        console.log(response);
+
+    });
+};
+
+
+
 
 // Create a function to initialize app
 function init() {
