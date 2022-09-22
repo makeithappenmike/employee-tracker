@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const express = require('express');
+const express = require('express');ß
 // Import and require mysql2
 const mysql = require('mysql2');
 
@@ -17,7 +17,7 @@ const db = mysql.createConnection(
     // MySQL username,
     user: 'root',
     // TODO: Add MySQL password here
-    password: '',
+    password: 'root',
     database: 'INSERT' // TODO: update this
   },
   console.log(`Connected to the INSERT database.`) // TODO: update this
