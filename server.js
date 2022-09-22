@@ -211,6 +211,13 @@ function addDepartment() {
 
         console.log(response);
 
+        const dbQuery = "INSERT INTO employee * (id, first_name, last_name, role_id, manager_id) VALUES (001, employeeFirst, employeeLast, role_id, manager_id) SELECT * FROM employee;"
+
+        // Show all Departments
+        connectDb(dbQuery);
+
+        initialPrompt();
+
     });
 };
 
@@ -234,6 +241,13 @@ function addEmployee() {
     .then((response) => {
 
         console.log(response);
+
+        const dbQuery = "INSERT INTO employee * (id, first_name, last_name, role_id, manager_id) VALUES (001, employeeFirst, employeeLast, role_id, manager_id) SELECT * FROM employee;"
+
+        // Show all Departments
+        connectDb(dbQuery);
+
+        initialPrompt();
 
     });
 };
