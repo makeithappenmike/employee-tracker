@@ -104,8 +104,29 @@ function initialPrompt() {
 
         console.log(response);
 
+        // Handle selection
+        if (choice === "View All Departments") {
+            console.log("View All Departments");
+        } else if (choice === "View All Roles") {
+            console.log("View All Roles");
+        } else if (choice === "View All Employees") {
+            console.log("View All Employees");
+        } else if (choice === "Add a Department") {
+            addDepartment();
+        } else if (choice === "Add a Role") {
+            addRole();
+        } else if (choice === "Add an Employee") {
+            addEmployee();
+        } else if (choice === "Update an Employee Role") {
+            updateEmployee();
+        } else {
+            console.log("No Selection Made");
+        }
+
     });
 };
+
+// 'View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an Employee Role'
 
 // Add Department
 function addDepartment() {
