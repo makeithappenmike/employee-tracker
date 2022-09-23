@@ -93,8 +93,9 @@ const addEmployeeQuestions = [
         name: "employeeLast"
     },
     {
-        type: "input",
-        message: "What is the employee's role?",
+        type: 'list',
+        message: 'What is the role of the employee?',
+        choices: ['Engineer I', 'Engineer II', 'Engineer III', 'Staff Engineer', 'Principle Engineer', 'Distinguished Engineer', 'Engineering Manager', 'Chief Financial Officer', 'Paralegal', 'Chief Councel', 'Sales Lead', 'Sales Associate', 'Sales Manager', 'Support Representative', 'Tech Support Engineer', 'Support Manager'],
         name: "employeeRole"
     },
     {
@@ -242,7 +243,50 @@ function addEmployee() {
 
         console.log(response);
 
-        const dbQuery = "INSERT INTO employee * (id, first_name, last_name, role_id, manager_id) VALUES (001, employeeFirst, employeeLast, role_id, manager_id) SELECT * FROM employee;"
+        // ['Engineer I', 'Engineer II', 'Engineer III', 'Staff Engineer', 'Principle Engineer', 'Distinguished Engineer', 'Engineering Manager', 'Chief Financial Officer', 'Paralegal', 'Chief Legal Councel', 'Sales Lead', 'Sales Associate', 'Sales Manager', 'Support Representative', 'Tech Support Engineer', 'Support Manager']
+        
+        var roleId = "";
+        var managerId = "";
+        const employeeRole = response.employeeRole;
+        const employeeManager = response.employeeManager;
+
+        // Handle role selection
+        if (employeeRole.includes("Engineer")) {
+            roleId = "001";
+            parseInt(roleId);
+        } else if (employeeRole.includes("Financial")) {
+            roleId = "002";
+            parseInt(roleId);
+        } else if (employeeRole.includes("Legal")) {
+            roleId = "003";
+            parseInt(roleId);
+        } else if (employeeRole.includes("Sales")) {
+            roleId = "004";
+            parseInt(roleId);
+        } else if (employeeRole.includes("Support")) {
+            roleId = "005";
+            parseInt(roleId);
+        };
+
+        // Handle manager selection
+        if (employeeManager.includes("Engineer")) {
+            roleId = "001";
+            parseInt(roleId);
+        } else if (employeeRole.includes("Financial")) {
+            roleId = "002";
+            parseInt(roleId);
+        } else if (employeeRole.includes("Legal")) {
+            roleId = "003";
+            parseInt(roleId);
+        } else if (employeeRole.includes("Sales")) {
+            roleId = "004";
+            parseInt(roleId);
+        } else if (employeeRole.includes("Support")) {
+            roleId = "005";
+            parseInt(roleId);
+        };
+
+        const dbQuery = `INSERT INTO employee (id, first_name, last_name, role_id, manager_id) VALUES (id, "${response.employeeFirst}", "${response.employeeLast}", ${roleId}, ${managerId});`
 
         // Show all Departments
         connectDb(dbQuery);

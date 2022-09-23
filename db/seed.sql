@@ -15,7 +15,7 @@ VALUES (001, "Engineer I", "85000", 001),
        (007, "Engineering Manager", "95000", 001),
        (008, "Chief Financial Officer", "150000", 002),
        (009, "Paralegal", "85000", 003),
-       (010, "Chief Councel", "145000", 003),
+       (010, "Chief Legal Councel", "145000", 003),
        (011, "Sales Lead", "65000", 004),
        (012, "Sales Associate", "55000", 004),
        (013, "Sales Manager", "80000", 004),
@@ -27,4 +27,8 @@ INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES (001, "FirstName", "LastName", 001, 001);
 
 INSERT INTO manager (id, first_name, last_name, role_id, department_id)
-VALUES (001, "FirstName", "LastName", 001, 001);
+VALUES (001, "Bob", "Smith", 001, 001),
+VALUES (002, "Susie", "Lou", 001, 001),
+       (003, "Joe", "Blank", 001, 001),
+       (004, "Kelly", "Bananas", 001, 001),
+       (005, "Steven", "Stephens", 001, 001);
