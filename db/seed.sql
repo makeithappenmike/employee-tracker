@@ -23,12 +23,8 @@ VALUES (001, "Engineer I", "85000", 001),
        (015, "Tech Support Engineer", "75000", 005),
        (016, "Support Manager", "90000", 005);
 
-INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
+INSERT INTO employee (employee_id, first_name, last_name, role_id, manager_id)
 VALUES (001, "FirstName", "LastName", 001, 001);
 
-INSERT INTO manager (id, first_name, last_name, role_id, department_id)
-VALUES (001, "Bob", "Smith", 001, 001),
-VALUES (002, "Susie", "Lou", 001, 001),
-       (003, "Joe", "Blank", 001, 001),
-       (004, "Kelly", "Bananas", 001, 001),
-       (005, "Steven", "Stephens", 001, 001);
+INSERT INTO manager (employee_id, first_name, last_name, manager_id, department_id)
+VALUES (001, "FirstName", "LastName", 001, 001);

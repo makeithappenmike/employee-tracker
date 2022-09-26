@@ -99,8 +99,9 @@ const addEmployeeQuestions = [
         name: "employeeRole"
     },
     {
-        type: "input",
-        message: "Who is the employee's manager?",
+        type: 'list',
+        message: 'Who is the manager of the employee?',
+        choices: ['Bob Robert', 'Susie Susanson', 'Kevin King', 'Nancy Nosey', 'Phylis Peterson'],
         name: "employeeManager"
     },
 ];
@@ -191,6 +192,16 @@ function viewRoles() {
 
 };
 
+// Get Role titles onle
+function viewRoleTitles() {
+
+    const dbQuery = "SELECT * FROM role;"
+
+    // Show all Departments
+    connectDb(dbQuery);
+
+};
+
 // View Employees
 function viewEmployees() {
 
@@ -212,7 +223,9 @@ function addDepartment() {
 
         console.log(response);
 
-        const dbQuery = "INSERT INTO employee * (id, first_name, last_name, role_id, manager_id) VALUES (001, employeeFirst, employeeLast, role_id, manager_id) SELECT * FROM employee;"
+        const departmentName = response.departmentName;
+
+        const dbQuery = `INSERT INTO department (department_id, name) VALUES (department_id, "${response.departmentName}");`
 
         // Show all Departments
         connectDb(dbQuery);
@@ -268,25 +281,7 @@ function addEmployee() {
             parseInt(roleId);
         };
 
-        // Handle manager selection
-        if (employeeManager.includes("Engineer")) {
-            roleId = "001";
-            parseInt(roleId);
-        } else if (employeeRole.includes("Financial")) {
-            roleId = "002";
-            parseInt(roleId);
-        } else if (employeeRole.includes("Legal")) {
-            roleId = "003";
-            parseInt(roleId);
-        } else if (employeeRole.includes("Sales")) {
-            roleId = "004";
-            parseInt(roleId);
-        } else if (employeeRole.includes("Support")) {
-            roleId = "005";
-            parseInt(roleId);
-        };
-
-        const dbQuery = `INSERT INTO employee (id, first_name, last_name, role_id, manager_id) VALUES (id, "${response.employeeFirst}", "${response.employeeLast}", ${roleId}, ${managerId});`
+        const dbQuery = `INSERT INTO employee (employee_id, first_name, last_name, role_id, manager_id) VALUES (employee_id, "${response.employeeFirst}", "${response.employeeLast}", ${roleId}, manager_id);`
 
         // Show all Departments
         connectDb(dbQuery);
