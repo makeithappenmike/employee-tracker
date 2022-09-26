@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
 const express = require('express');
 const cTable = require('console.table');
-const Departments = require("./db/Departments.js");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -201,9 +200,7 @@ function addDepartment() {
 
         console.log(response);
 
-        const departmentName = new Departments("department_id", response.departmentName);
-
-        console.log("departmentName", departmentName);
+        const departmentName = response.departmentName;
 
         const dbQuery = `INSERT INTO department (department_id, name) VALUES (department_id, "${response.departmentName}");`
 
@@ -214,27 +211,6 @@ function addDepartment() {
 
     });
 };
-
-// // Add Department
-// function addDepartment() {
-//     // Run inquirer
-//     inquirer
-//     .prompt(addDepartmentQuestions)
-//     .then((response) => {
-
-//         console.log(response);
-
-//         const departmentName = response.departmentName;
-
-//         const dbQuery = `INSERT INTO department (department_id, name) VALUES (department_id, "${response.departmentName}");`
-
-//         // Show all Departments
-//         connectDb(dbQuery);
-
-//         initialPrompt();
-
-//     });
-// };
 
 // Add Role
 function addRole() {
