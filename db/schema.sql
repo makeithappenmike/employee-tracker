@@ -27,6 +27,6 @@ CREATE TABLE manager (
     employee_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
-    manager_id INT AUTO_INCREMENT,
+    manager_id INT,
     department_id INT
 );

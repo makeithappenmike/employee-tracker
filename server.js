@@ -95,7 +95,7 @@ const addEmployeeQuestions = [
     {
         type: 'list',
         message: 'What is the role of the employee?',
-        choices: ['Engineer I', 'Engineer II', 'Engineer III', 'Staff Engineer', 'Principle Engineer', 'Distinguished Engineer', 'Engineering Manager', 'Chief Financial Officer', 'Paralegal', 'Chief Councel', 'Sales Lead', 'Sales Associate', 'Sales Manager', 'Support Representative', 'Tech Support Engineer', 'Support Manager'],
+        choices: ['Engineer I', 'Engineer II', 'Engineer III', 'Staff Engineer', 'Principle Engineer', 'Distinguished Engineer', 'Engineering Manager', 'Chief Financial Officer', 'Associate Legal Counsel', 'Chief Councel', 'Sales Lead', 'Sales Associate', 'Sales Manager', 'Support Representative', 'Tech Support Engineer', 'Support Manager'],
         name: "employeeRole"
     },
     {
@@ -244,6 +244,12 @@ function addRole() {
 
         console.log(response);
 
+        const dbQuery = `INSERT INTO role (role_id, title, salary, department_id) VALUES (role_id, "${response.roleName}", "${response.roleSalary}", "${response.roleDepartment}");`
+
+        connectDb(dbQuery);
+
+        initialPrompt();
+
     });
 };
 
@@ -256,7 +262,7 @@ function addEmployee() {
 
         console.log(response);
 
-        // ['Engineer I', 'Engineer II', 'Engineer III', 'Staff Engineer', 'Principle Engineer', 'Distinguished Engineer', 'Engineering Manager', 'Chief Financial Officer', 'Paralegal', 'Chief Legal Councel', 'Sales Lead', 'Sales Associate', 'Sales Manager', 'Support Representative', 'Tech Support Engineer', 'Support Manager']
+        // ['Engineer I', 'Engineer II', 'Engineer III', 'Staff Engineer', 'Principle Engineer', 'Distinguished Engineer', 'Engineering Manager', 'Chief Financial Officer', 'Chief Legal Councel', 'Chief Legal Councel', 'Sales Lead', 'Sales Associate', 'Sales Manager', 'Support Representative', 'Tech Support Engineer', 'Support Manager']
         
         var roleId = "";
         var managerId = "";
