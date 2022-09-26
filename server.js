@@ -1,8 +1,7 @@
 const inquirer = require('inquirer');
 const express = require('express');
 const cTable = require('console.table');
-// Import and require mysql2
-// const mysql = require('mysql2');
+const Departments = require("./db/Departments.js");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -20,27 +19,6 @@ async function main() {
     // query database
     const [rows, fields] = await db.execute('SHOW tables;');
   }
-// const db = mysql.createConnection(
-//     {host:'localhost', user: 'root', password: 'root', database: 'employee_db'}
-//   );
-//   db.promise().query("SELECT *")
-//     .then( ([rows,fields]) => {
-//       console.log(rows);
-//     })
-//     .catch(console.log)
-//     .then( () => db.end());
-
-// const db = mysql.createConnection(
-//   {
-//     host: 'localhost',
-//     // MySQL username,
-//     user: 'root',
-//     // TODO: Add MySQL password here
-//     password: 'root',
-//     database: 'employee_db'
-//   },
-//   console.log(`Connected to the employee_db database.`)
-// );
 
 // Intial Questions
 const initialQuestions = [
@@ -223,7 +201,9 @@ function addDepartment() {
 
         console.log(response);
 
-        const departmentName = response.departmentName;
+        const departmentName = new Departments("department_id", response.departmentName);
+
+        console.log("departmentName", departmentName);
 
         const dbQuery = `INSERT INTO department (department_id, name) VALUES (department_id, "${response.departmentName}");`
 
@@ -234,6 +214,27 @@ function addDepartment() {
 
     });
 };
+
+// // Add Department
+// function addDepartment() {
+//     // Run inquirer
+//     inquirer
+//     .prompt(addDepartmentQuestions)
+//     .then((response) => {
+
+//         console.log(response);
+
+//         const departmentName = response.departmentName;
+
+//         const dbQuery = `INSERT INTO department (department_id, name) VALUES (department_id, "${response.departmentName}");`
+
+//         // Show all Departments
+//         connectDb(dbQuery);
+
+//         initialPrompt();
+
+//     });
+// };
 
 // Add Role
 function addRole() {
