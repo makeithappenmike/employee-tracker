@@ -83,15 +83,14 @@ const addEmployeeQuestions = [
     },
 ];
 
-// Update an Employee Questions
-const updateEmployeeQuestions = [
-    {
-        type: 'list',
-        message: 'Which employee would you like to make updates to?',
-        choices: ['Employee'],
-        name: 'employeeToUpdate'
-    }
-];
+// // Update an Employee Questions
+// const updateEmployeeQuestions = [
+//     {
+//         type: 'input',
+//         message: 'Which employee would you like to make updates to (Please select an ID)?',
+//         name: 'employeeToUpdate'
+//     }
+// ];
 
 // Initial Prompt
 function initialPrompt() {
@@ -122,6 +121,7 @@ function initialPrompt() {
         } else if (choice === "Add an Employee") {
             addEmployee();
         } else if (choice === "Update an Employee Role") {
+            viewEmployees();
             updateEmployee();
         } else {
             console.log("No Selection Made");
@@ -264,7 +264,25 @@ function addEmployee() {
             parseInt(roleId);
         };
 
-        const dbQuery = `INSERT INTO employee (employee_id, first_name, last_name, role_id, manager_id) VALUES (employee_id, "${response.employeeFirst}", "${response.employeeLast}", ${roleId}, manager_id);`
+        // Handle Manager selection
+        if (employeeManager.includes("Bob")) {
+            managerId = "100";
+            parseInt(managerId);
+        } else if (employeeManager.includes("Susie")) {
+            managerId = "101";
+            parseInt(managerId);
+        } else if (employeeManager.includes("Kevin")) {
+            managerId = "102";
+            parseInt(managerId);
+        } else if (employeeManager.includes("Nancy")) {
+            managerId = "103";
+            parseInt(managerId);
+        } else if (employeeManager.includes("Phylis")) {
+            managerId = "104";
+            parseInt(managerId);
+        };
+
+        const dbQuery = `INSERT INTO employee (employee_id, first_name, last_name, role_id, manager_id) VALUES (employee_id, "${response.employeeFirst}", "${response.employeeLast}", ${roleId}, ${managerId});`
 
         // Show all Departments
         connectDb(dbQuery);
@@ -276,14 +294,18 @@ function addEmployee() {
 
 // Update Employee
 function updateEmployee() {
-    // Run inquirer
-    inquirer
-    .prompt(updateEmployeeQuestions)
-    .then((response) => {
 
-        console.log(response);
+    console.log("\n\nThis feature is coming soon!");
 
-    });
+    // // Run inquirer
+
+    // inquirer
+    // .prompt(updateEmployeeQuestions)
+    // .then((response) => {
+
+    //     console.log(response);
+
+    // });
 };
 
 // Create a function to initialize app

@@ -27,4 +27,8 @@ INSERT INTO employee (employee_id, first_name, last_name, role_id, manager_id)
 VALUES (001, "FirstName", "LastName", 001, 001);
 
 INSERT INTO manager (employee_id, first_name, last_name, manager_id, department_id)
-VALUES (001, "FirstName", "LastName", 001, 001);
+VALUES (100, "Bob", "Robert", 001, 001),
+       (101, "Susie", "Susanson", 001, 001),
+       (102, "Kevin", "King", 001, 001),
+       (103, "Nancy", "Nosey", 001, 001),
+       (104, "Phylis", "Peterson", 001, 001);
